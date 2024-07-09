@@ -1,27 +1,42 @@
 package com.itst.repositorio_objetos_aprendizaje.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "usuario")
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idUsuario;
+    private Integer idUsuario;
 
-    private String nombre;
-    private String apPaterno;
-    private String apMaterno;
+    @Column(nullable = false, length = 50)
+    private String nombreUsuario;
+
+    @Column(nullable = false, length = 50)
     private String email;
-    private int idRol;
 
-    public int getIdRol() {
-        return idRol;
+    @ManyToOne
+    @JoinColumn(name = "idRol", nullable = false)
+    private Rol rol;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Descarga> descargas;
+
+    // Getters y Setters
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public String getEmail() {
@@ -32,35 +47,19 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getApMaterno() {
-        return apMaterno;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setApMaterno(String apMaterno) {
-        this.apMaterno = apMaterno;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
-    public String getApPaterno() {
-        return apPaterno;
+    public List<Descarga> getDescargas() {
+        return descargas;
     }
 
-    public void setApPaterno(String apPaterno) {
-        this.apPaterno = apPaterno;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setDescargas(List<Descarga> descargas) {
+        this.descargas = descargas;
     }
 }
