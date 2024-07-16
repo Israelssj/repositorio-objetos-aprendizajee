@@ -14,6 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/rol")
 public class RolController {
+
     @Autowired
     private RolRepository rolRepository;
 
@@ -55,7 +56,7 @@ public class RolController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/usuario/{idRol}")
+    @GetMapping("/usuarios/{idRol}")
     public ResponseEntity<Iterable<Usuario>> getUsuariosByRol(@PathVariable Integer idRol) {
         Optional<Rol> rolOptional = rolRepository.findById(idRol);
         if (rolOptional.isPresent()) {

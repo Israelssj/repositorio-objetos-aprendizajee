@@ -18,6 +18,16 @@ public class Rol {
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
     private List<Usuario> usuarios;
 
+    // Constructor vacío
+    public Rol() {
+    }
+
+    // Constructor con parámetros sin la llave primaria ni relaciones
+    public Rol(String nombreRol, String descripcion) {
+        this.nombreRol = nombreRol;
+        this.descripcion = descripcion;
+    }
+
     // Getters y Setters
     public Integer getIdRol() {
         return idRol;

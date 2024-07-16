@@ -4,15 +4,22 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuario;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombreUsuario;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "apPaterno", nullable = false, length = 50)
+    private String apellidoPaterno;
+
+    @Column(name = "apMaterno", nullable = false, length = 50)
+    private String apellidoMaterno;
+
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
 
     @ManyToOne
@@ -21,6 +28,19 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Descarga> descargas;
+
+    // Constructores
+    public Usuario() {
+        // Constructor vacío necesario para JPA
+    }
+
+    public Usuario(String nombreUsuario, String apellidoPaterno, String apellidoMaterno, String email, Rol rol) {
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.email = email;
+        this.rol = rol;
+    }
 
     // Getters y Setters
     public Integer getIdUsuario() {
@@ -37,6 +57,22 @@ public class Usuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
     }
 
     public String getEmail() {
